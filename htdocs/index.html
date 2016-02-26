@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    
+    <link rel="stylesheet" href="kendo/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="kendo/styles/kendo.bootstrap.min.css" />
+
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.xml2json.js"></script>
+    <script type="text/javascript" src="js/jquery.soap.js"></script>
+
+    <script type="text/javascript" src="kendo/cultures/kendo.culture.ru-RU.js"></script>
+    <script type="text/javascript" src="kendo/js/kendo.web.min.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+    <title></title>
+</head>
+<body>
+<div id="application"></div>
+<div id="main">
+    <div class="loading"><img src="img/loading.gif" alt=""></div>
+    <span id="btn_load" class="k-button">Загрузить прайс</span> 
+    <span class="k-textbox k-space-left">
+        <input id="search" type="text" value="" placeholder="Поиск"/>
+        <a href="#" class="k-icon k-i-search">&nbsp;</a>
+    </span>
+    <span class="btn-group btn-toggle" style="margin: 10px 10px 10px 0;">
+        <button class="k-button btn btn-primary active">Прайс</button>
+        <button class="k-button btn btn-default">Заказ</button>
+    </span>
+    <button id="sendOrder" class="k-button">Отправить заказ</button>
+    <div id="grid"></div>
+    <!-- Шаблон для списка -->
+    <script id="rowTemplate" type="text/x-kendo-tmpl"> 
+        # var date = (expirationDate != '0001-01-01T00:00:00')?kendo.parseDate(expirationDate):0 #
+        # var now = new Date(); var sixMonths = (date)?now.setMonth(now.getMonth()+6):0 #
+        # var GVL = (GVL === "true"); var price = parseFloat(price) #
+        # var registryPrice = parseFloat(registryPrice); var orderSum = parseFloat(orderSum) # 
+        <tr data-uid="#: uid #" class="#=(sixMonths > date)?'lessSixMonths':''#">
+            <td >
+                #= name #
+            </td>
+            <td>
+                #= manufacture #
+            </td>
+            <td >
+                # if (NDS == 18) { #
+                    #= '18%' #
+                # } else if (NDS == 10) {#
+                    #= '10%' #
+                # } else { #
+                    #= 'Без НДС' #
+                # }#
+            </td>
+            <td >
+                  #= kendo.toString(price, "0.00") #р.
+            </td>
+            <td >
+                # if (date) { #
+                    #= kendo.toString(date, 'dd.MM.yyyy') #
+                # } #
+            </td>
+            <td >
+                  #= balanse #
+            </td>
+            <td style="text-align: center">
+                  # if (GVL) { #
+                    #= "<span class='k-icon k-i-tick'></span>" #
+                # } #
+            </td>
+            <td >
+                # if (registryPrice > 0) { #
+                      #= kendo.toString(registryPrice, "0.00") #р.
+                  # } #
+            </td>
+            <td class="orderColum">
+                # if (parseInt(orderCount) > 0) { #
+                      #= orderCount #
+                  # } #
+            </td>
+            <td class="orderSum">
+                # if (orderSum > 0) { #
+                      #=  kendo.toString(orderSum, "0.00") #р.
+                  # } #
+            </td>
+       </tr>
+    </script>
+</div>
+<div id="login"> Login </div>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

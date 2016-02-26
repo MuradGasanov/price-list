@@ -1,0 +1,33 @@
+﻿<xs:schema xmlns:tns="http://www.sample-package.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sample-package.org" attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:complexType name="order">
+		<xs:sequence>
+			<xs:element name="orderItem" type="tns:orderItem" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="orderItem">
+		<xs:sequence>
+			<xs:element name="code" type="xs:int"/>
+			<xs:element name="count" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="price">
+		<xs:sequence>
+			<xs:element name="price" type="tns:priceItem" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="priceItem">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="manufacture" type="xs:string" nillable="true"/>
+			<xs:element name="balanse" type="xs:double" nillable="true"/>
+			<xs:element name="NDS" type="xs:int" nillable="true"/>
+			<xs:element name="price" type="xs:double" nillable="true"/>
+			<xs:element name="expirationDate" type="xs:dateTime" nillable="true"/>
+			<xs:element name="GVL" type="xs:boolean"/>
+			<xs:element name="registryPrice" type="xs:float" nillable="true"/>
+			<xs:element name="orderCount" type="xs:int"/>
+			<xs:element name="orderSum" type="xs:double"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
